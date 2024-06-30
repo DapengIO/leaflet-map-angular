@@ -8,4 +8,5 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The appl
 
 ## Notice
 **Since the longitude and latitude of the cluster cannot accurately match the coordinates of the API.**
-**All pop-up windows in the project are interacted by clicking on the marker.**
+
+**All pop-up windows in the project are interacted by clicking on the round blue marker.**
