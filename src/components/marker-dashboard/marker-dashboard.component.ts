@@ -14,15 +14,17 @@ import { DailyEnergyChartComponent } from '../daily-energy-chart/daily-energy-ch
   imports: [DailyEnergyChartComponent],
   template: `
     <div
-      class="absolute w-full h-screen flex justify-center items-center z-999 top-0"
+      class="absolute w-full h-screen flex justify-center items-center z-999 top-0 "
     >
       <div
         id="marker-dashboard"
-        class="flex rounded-2xl overflow-hidden backdrop-blur-sm max-w-screen-lg"
+        class="flex rounded-2xl overflow-hidden backdrop-blur-sm max-w-screen-lg md:flex-row flex-col max-[480px]:max-h-80 max-[480px]:overflow-y-auto"
       >
         <div class="bg-gray-700/50 p-4">
           <h3>Dashboards</h3>
-          <ul>
+          <ul
+            class="max-[480px]:flex max-[480px]:justify-around max-[480px]:items-center"
+          >
             @for(menu of dashboardMenu; track menu){
             <li class="py-2 flex items-center whitespace-nowrap">
               <svg
@@ -73,8 +75,8 @@ import { DailyEnergyChartComponent } from '../daily-energy-chart/daily-energy-ch
               </svg>
             </button>
           </div>
-          <div class="grid grid-cols-4 gap-3">
-            <div class="col-span-2 bg-gray-700/70 py-2 px-4 rounded-2xl">
+          <div class="grid md:grid-cols-4 gap-3">
+            <div class="md:col-span-2 bg-gray-700/70 py-2 px-4 rounded-2xl">
               <h5 class="text-xl">Assets</h5>
               <div class="grid grid-cols-2 gap-4">
                 <div class="text-white">
@@ -125,10 +127,10 @@ import { DailyEnergyChartComponent } from '../daily-energy-chart/daily-energy-ch
               </div>
             </div>
             <div class="bg-gray-700/70 rounded-2xl overflow-hidden">
-              <div id="marker-map" class="w-full h-full"></div>
+              <div id="marker-map" class="w-full h-full min-h-36"></div>
             </div>
           </div>
-          <div class="grid grid-cols-4 gap-3 mt-4">
+          <div class="grid md:grid-cols-4 gap-3 mt-4">
             <div class="bg-gray-700/70 py-2 px-4 rounded-2xl">
               <h5>Today's Generation</h5>
               <svg
@@ -173,7 +175,10 @@ import { DailyEnergyChartComponent } from '../daily-energy-chart/daily-energy-ch
             </div>
             <div class="col-span-3 bg-gray-700/70 py-2 px-4 rounded-2xl">
               <h5>Irradiation Timeseries</h5>
-              <app-daily-energy-chart [data]="data.hourly" />
+              <app-daily-energy-chart
+                [id]="'marker-chart' + data.name"
+                [data]="data.hourly"
+              />
             </div>
           </div>
         </div>

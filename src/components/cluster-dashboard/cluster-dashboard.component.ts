@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, Pipe } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DailyEnergyChartComponent } from '../daily-energy-chart/daily-energy-chart.component';
 import { CommonModule } from '@angular/common';
 
@@ -7,32 +7,36 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [DailyEnergyChartComponent, CommonModule],
   template: `
-    <div class="absolute z-999 right-20 top-20">
-      <div class="grid grid-cols-2 gap-4">
+    <div id="cluster-dashboard" class="absolute z-999 md:right-20 top-20">
+      <div class="grid md:grid-cols-2 gap-4">
         <div
           id="dashboard-assets "
-          class="bg-gray-400/30 p-2 rounded-xl backdrop-blur-md"
+          class="bg-gray-400/30 p-2 rounded-xl backdrop-blur-md max-[480px]:flex max-[480px]:justify-around max-[480px]:items-center"
         >
           <h5 class="text-white">Assets</h5>
-          <div class="pl-3">
-            <div class="text-lg text-white">{{ data?.elevation }}</div>
-            <div class="text-lg text-white">
-              {{ data.mwp | number }} <span class="text-2sm">MWp</span>
-            </div>
+          <div class="md:pl-3 text-lg text-white">1452</div>
+          <div class="md:pl-3 text-lg text-white">
+            {{ 1461.23 | number }} <span class="text-2sm">MWp</span>
           </div>
         </div>
         <div
           id="dashboard-performance"
           class="bg-gray-400/50 p-2 rounded-xl backdrop-blur-md"
         >
-          <h5 class="text-white">Today's Performance</h5>
-          <div class="text-2sm text-white">Last update at</div>
-          <div class="pl-3">
+          <div
+            class="max-[480px]:flex max-[480px]:justify-between max-[480px]:items-center"
+          >
+            <h5 class="text-white">Today's Performance</h5>
+            <div class="text-2sm text-white">Last update at: 2024-04-23</div>
+          </div>
+          <div
+            class="pl-3 max-[480px]:flex max-[480px]:justify-around max-[480px]:items-center"
+          >
             <div class="text-lg text-white">
-              {{ data.mwh | number }} <span class="text-2sm">MWh</span>
+              {{ 1463.23 | number }} <span class="text-2sm">MWh</span>
             </div>
             <div class="text-lg text-white">
-              {{ data.mwh * 0.29 | number : '1.0' }}
+              {{ 23 | number : '1.0' }}
               <span class="text-2sm">MW</span>
             </div>
           </div>
@@ -43,14 +47,12 @@ import { CommonModule } from '@angular/common';
         class="bg-gray-400/30 p-2 rounded-xl backdrop-blur-md mt-4"
       >
         <h5 class="text-white">Daily Energy Generated</h5>
-        <app-daily-energy-chart [data]="data.hourly" />
+        <app-daily-energy-chart [id]="'cluster-chart'" [data]="data.hourly" />
       </div>
     </div>
   `,
   styleUrl: './cluster-dashboard.component.scss',
 })
-export class ClusterDashboardComponent implements AfterViewInit {
+export class ClusterDashboardComponent {
   @Input() data: any;
-
-  ngAfterViewInit(): void {}
 }
